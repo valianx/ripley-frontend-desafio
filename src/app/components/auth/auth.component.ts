@@ -13,6 +13,6 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {}
   loginValidation(): void {
-    this.router.navigate(['home']);
+    this.router.navigate(['']);
   }
 }
