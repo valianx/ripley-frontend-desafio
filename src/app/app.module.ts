@@ -13,6 +13,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CardsComponent } from './components/shared/cards/cards.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     BalanceComponent,
     TransfersComponent,
     HistorialComponent,
+    CardsComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     NzPageHeaderModule,
     NzGridModule,
     NoopAnimationsModule,
+    DataTablesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

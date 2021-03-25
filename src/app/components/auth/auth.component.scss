@@ -1,0 +1,53 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    font-family: "Nunito Sans";
+}
+
+.form-control {
+    line-height: 2;
+}
+
+.bg-custom {
+    background-color: #6C63FF;
+}
+
+.btn-custom {
+    background-color: #3e3d56;
+    color: #fff;
+}
+
+.btn-custom:hover {
+    background-color: #33313f;
+    color: #fff;
+}
+
+label {
+    color: #fff;
+}
+
+a,
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+@media(max-width: 932px) {
+    .display-none {
+        display: none !important;
+    }
+}
+
+#contenedorLogin {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
