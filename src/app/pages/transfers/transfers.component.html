@@ -1,0 +1,44 @@
+<div>
+  <h1>Nueva transferencia</h1>
+
+  <form 
+  #t="ngForm" 
+  class="w-75" 
+  action="#" 
+  (ngSubmit)="newTransfer(t)"
+  >
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Rut</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="rut"
+        required
+        name="rut"
+        ngModel
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput2" class="form-label">cantidad</label>
+      <input
+        type="number"
+        class="form-control"
+        id="exampleFormControlInput2"
+        placeholder="cantidad"
+        required
+        name="amount"
+        ngModel
+      />
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <button type="submit" class="btn btn-custom btn-lg btn-block mt-3">
+          Enviar
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

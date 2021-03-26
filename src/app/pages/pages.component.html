@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <h3>LOGO RIPLEY</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+      <p>Dashboard</p>
+      <li>
+        <a routerLink="" style="color: black" href="#">Inicio</a>
+      </li>
+      <li>
+        <a routerLink="transfer" style="color: black" href="#">Transferencia</a>
+      </li>
+      <li>
+        <a routerLink="retiros" style="color: black" href="#">Retiros</a>
+      </li>
+      <li>
+        <a routerLink="carga" style="color: black" href="#">Cargar fondos</a>
+      </li>
+    </ul>
+
+    <ul class="list-unstyled CTAs">
+      <li>
+        <a (click)="logOut()" href="" class="download">Desconectarse</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+    <div class="container offset-md-2 mt-4">
+      <div class="row">
+        <div
+          class="col-sm col-md-4 card text-dark bg-warning"
+          style="text-align: center"
+        >
+          <div class="card-header fw-bold">Personal data</div>
+          <div class="card-body">
+            <p class="fs-6">{{ nombre }}</p>
+            <p class="fs-6">Email: {{ email }}</p>
+          </div>
+        </div>
+        <div
+          class="col-sm offset-md-2 col-md-4 card text-dark bg-info"
+          style="text-align: center"
+        >
+          <div class="card-header fw-bold">Account balances</div>
+          <div class="card-body" style="text-align: center">
+            <button type="button" class="btn btn-primary">
+              Balance <span class="badge bg-secondary">$ {{ balance }}</span>
+              <span class="visually-hidden">More info</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container text-center mt-4">
+      <router-outlet></router-outlet>
+    </div>
+
+    <div class="line"></div>
+  </div>
+</div>

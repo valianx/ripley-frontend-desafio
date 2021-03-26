@@ -1,42 +1,41 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { APP_ROUTES } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './components/auth/auth.component';
-import { HomeComponent } from './components/home/home.component';
-import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
-import { BalanceComponent } from './components/balance/balance.component';
-import { TransfersComponent } from './components/transfers/transfers.component';
-import { HistorialComponent } from './components/historial/historial.component';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
-import { NzGridModule } from 'ng-zorro-antd/grid';
+import { AuthComponent } from './auth/auth.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { CardsComponent } from './components/shared/cards/cards.component';
-import { DataTablesModule } from 'angular-datatables';
+
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { PageModule } from './pages/page.module';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorServiceService } from './services/token-interceptor-service.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent,
-    WithdrawalsComponent,
-    BalanceComponent,
-    TransfersComponent,
-    HistorialComponent,
-    CardsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    NzButtonModule,
-    NzPageHeaderModule,
-    NzGridModule,
     NoopAnimationsModule,
-    DataTablesModule,
+    FormsModule,
+    HttpClientModule,
+    SweetAlert2Module.forRoot(),
+    APP_ROUTES,
+    PageModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorServiceService,
+      multi: true,
+    },
+  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

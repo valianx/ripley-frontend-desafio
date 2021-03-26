@@ -1,52 +1,44 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Login } from 'src/app/models/login';
-import { LoginService } from 'src/app/services/login.service';
-
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  selector: 'app-transfers',
+  templateUrl: './transfers.component.html',
+  styleUrls: ['./transfers.component.scss'],
 })
-export class AuthComponent implements OnInit {
-  constructor(private router: Router, private loginService: LoginService) {}
-
-  login = true;
-  user: Login = {
-    rut: '',
-    password: '',
+export class TransfersComponent implements OnInit {
+  transferencia = {
+    amount: 0,
+    destinoRut: '',
+    origenRut: '',
+    createdAt: '',
   };
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {}
-  loginValidation(f: NgForm): void {
-    this.user.rut = this.checkRut(f.value.rut);
-    this.user.password = f.value.password;
-    console.log(this.user.rut);
-    this.loginService.signin(this.user).subscribe({
+
+  newTransfer(f: NgForm): void {
+    this.transferencia.amount = f.value.amount;
+    this.transferencia.destinoRut = f.value.rut;
+    this.transferencia.origenRut = localStorage.getItem('rut') ?? '';
+
+    this.dataService.nuevaTransferencia(this.transferencia).subscribe({
       next: (data) => {
-        localStorage.setItem('id', data.id);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('correo', data.email);
-        localStorage.setItem('nombre', data.nombre);
-        localStorage.setItem('rut', data.rut);
-        this.router.navigate(['']);
+        console.log(data);
+        const balance = this.transferencia.amount - data.amount;
+        localStorage.setItem('balance', balance.toString());
+        Swal.fire('Se ha efectuado la transferencia correctamente', '', 'success');
+        // window.location.reload();
       },
-      error: (error) => {
-        Swal.fire({
-          title: 'Error!',
-          text: 'rut o contraseña erronea',
-          icon: 'error',
-          // confirmButtonText: 'Cool',
-        });
+      error: (data) => {
+        console.log(data.message);
       },
     });
+    console.log(this.transferencia);
   }
-
   checkRut = (rut: any): string => {
-    console.log(rut);
     // Despejar Puntos
     let valor = rut.replaceAll('.', '');
     // Despejar Guión

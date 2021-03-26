@@ -1,0 +1,24 @@
+<div>
+  <h1>Nuevo retiro</h1>
+  <form #t="ngForm" class="w-75" action="#" (ngSubmit)="nuevoRetiro(t)">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Cantidad</label>
+      <input
+        type="number"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="cantidad"
+        required
+        name="cantidad"
+        ngModel
+      />
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <button type="submit" class="btn btn-custom btn-lg btn-block mt-3">
+          Retirar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

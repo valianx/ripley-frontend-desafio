@@ -1,0 +1,20 @@
+<div>
+  <h1>Historial de transferencias</h1>
+  <table datatable class="row-border hover">
+    <thead>
+      <tr>
+        <th>rut</th>
+        <th>cantidad</th>
+        <th>fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of transferencias; index as i">
+        <td>{{ i }}</td>
+        <td>{{ item.destinatario_user }}</td>
+        <td>{{ item.amount }}</td>
+        <td>{{ item.createdAt }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

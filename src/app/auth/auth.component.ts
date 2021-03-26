@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login';
 import { LoginService } from 'src/app/services/login.service';
-
 import Swal from 'sweetalert2';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-auth',
@@ -20,11 +20,19 @@ export class AuthComponent implements OnInit {
     password: '',
   };
 
+  registroUser: User = {
+    correo: '',
+    nombre: '',
+    password: '',
+    rut: '',
+    saldo: 0,
+  };
+
   ngOnInit(): void {}
   loginValidation(f: NgForm): void {
-    this.user.rut = this.checkRut(f.value.rut);
+    this.user.rut = f.value.rut;
     this.user.password = f.value.password;
-    console.log(this.user.rut);
+
     this.loginService.signin(this.user).subscribe({
       next: (data) => {
         localStorage.setItem('id', data.id);
@@ -32,6 +40,7 @@ export class AuthComponent implements OnInit {
         localStorage.setItem('correo', data.email);
         localStorage.setItem('nombre', data.nombre);
         localStorage.setItem('rut', data.rut);
+        localStorage.setItem('balance', data.balance);
         this.router.navigate(['']);
       },
       error: (error) => {
@@ -44,9 +53,44 @@ export class AuthComponent implements OnInit {
       },
     });
   }
+  registro(f: NgForm): void {
+    if (f.value.password !== f.value.pass) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'contraseñas no coinciden',
+        icon: 'error',
+      });
+    } else {
+      this.registroUser.correo = f.value.email;
+      this.registroUser.nombre = f.value.nombre;
+      this.registroUser.password = f.value.password;
+      this.registroUser.rut = this.checkRut(f.value.rut);
+      this.registroUser.saldo = f.value.saldo;
+      console.log(this.registroUser);
+
+      this.loginService.signup(this.registroUser).subscribe({
+        next: (data) => {
+          console.log(data);
+          localStorage.setItem('id', data.body.id);
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('correo', data.body.correo);
+          localStorage.setItem('nombre', data.body.nombre);
+          localStorage.setItem('rut', data.body.rut);
+          localStorage.setItem('balance', data.body.saldo);
+          this.router.navigate(['']);
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'usuario ya esta registrado',
+            icon: 'error',
+          });
+        },
+      });
+    }
+  }
 
   checkRut = (rut: any): string => {
-    console.log(rut);
     // Despejar Puntos
     let valor = rut.replaceAll('.', '');
     // Despejar Guión
