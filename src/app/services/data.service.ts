@@ -13,7 +13,7 @@ export class DataService {
   private url = 'http://localhost:3000/api/';
   constructor(private http: HttpClient, private router: Router) {}
   getTransferencias(id: number | null): Observable<any> {
-    return this.http.get<any>(this.url + '/users/' + id);
+    return this.http.get<any>(this.url + '/transferencias/' + id);
   }
   nuevaTransferencia(data: any): Observable<any> {
     return this.http.post<any>(this.url + '/nuevaTransferencia', data);

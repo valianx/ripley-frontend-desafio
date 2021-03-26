@@ -26,10 +26,12 @@ export class TransfersComponent implements OnInit {
 
     this.dataService.nuevaTransferencia(this.transferencia).subscribe({
       next: (data) => {
-        console.log(data);
-        const balance = this.transferencia.amount - data.amount;
-        localStorage.setItem('balance', balance.toString());
-        Swal.fire('Se ha efectuado la transferencia correctamente', '', 'success');
+        localStorage.setItem('balance', data.newBalance);
+        Swal.fire(
+          'Se ha efectuado la transferencia correctamente',
+          '',
+          'success'
+        );
         // window.location.reload();
       },
       error: (data) => {

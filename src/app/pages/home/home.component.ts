@@ -16,12 +16,16 @@ export class HomeComponent implements OnInit {
   }
 
   getTransferencias(): void {
+    console.log('asdsaa');
     const id = localStorage.getItem('id') ?? '';
-    this.dataService.getTransferencias(parseInt(id)).subscribe({
-      next: (data: Transferencia) => {
-        console.log(data);
+    this.dataService.getTransferencias(parseInt(id, 10)).subscribe({
+      next: (data: Transferencia[]) => {
+        this.transferencias = data;
+        console.log(this.transferencias);
       },
-      error: (error: any) => {},
+      error: (error: any) => {
+        console.log(error);
+      },
     });
   }
 }
