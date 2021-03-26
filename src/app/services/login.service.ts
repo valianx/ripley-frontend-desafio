@@ -9,7 +9,7 @@ import { User } from '../models/User';
   providedIn: 'root',
 })
 export class LoginService {
-  private url = 'http://localhost:3000/api';
+  private url = 'https://desafio-ripley-app.herokuapp.com/api';
   constructor(private http: HttpClient, private router: Router) {}
 
   signup(user: User): Observable<any> {

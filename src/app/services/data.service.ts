@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Carga } from '../models/Carga';
 import { Retiro } from '../models/Retiro';
-import { Transferencia } from '../models/transferencia';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private url = 'http://localhost:3000/api/';
+  private url = 'https://desafio-ripley-app.herokuapp.com/api';
   constructor(private http: HttpClient, private router: Router) {}
   getTransferencias(id: number | null): Observable<any> {
     return this.http.get<any>(this.url + '/transferencias/' + id);
